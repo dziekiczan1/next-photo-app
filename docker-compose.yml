@@ -1,0 +1,47 @@
+services:
+  # Bun service (use with: docker compose up photo-app-bun --build)
+  photo-app-bun:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: photo-app-bun-dev-image
+    container_name: photo-app-bun-dev-container
+    environment:
+      NODE_ENV: development
+      PORT: ${APP_PORT}
+      DATABASE_URL: ${DATABASE_URL}
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+    ports:
+      - "3012:3012"
+    restart: unless-stopped
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+
+  db:
+    image: mysql:8.0
+    container_name: memeapp-mysql-local
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mysql_data:
+    name: memeapp-mysql-data
