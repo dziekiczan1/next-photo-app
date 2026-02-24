@@ -6,11 +6,17 @@
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "docker": "docker compose up photo-app-bun",
+    "docker": "docker compose up photo-app-bun -d",
+    "docker-build": "docker compose up photo-app-bun --build",
+    "ngrok": "ngrok http 3012",
     "lint": "eslint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.38.2",
+    "@prisma/adapter-mariadb": "^7.4.1",
+    "@prisma/client": "^7.4.1",
     "next": "16.1.6",
+    "prisma": "^7.4.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
