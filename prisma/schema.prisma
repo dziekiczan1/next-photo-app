@@ -12,3 +12,50 @@ generator client {
 datasource db {
   provider = "mysql"
 }
+
+model User {
+  id        String   @id @default(uuid())
+  clerkId   String   @unique
+  email     String?  @unique
+  firstName String?
+  lastName  String?
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  posts    Post[]
+  likes    Like[]
+  comments Comment[]
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  imagePath String
+  createdAt DateTime @default(now())
+
+  user     User      @relation(fields: [userId], references: [id])
+  likes    Like[]
+  comments Comment[]
+}
+
+model Like {
+  id     Int    @id @default(autoincrement())
+  postId Int
+  userId String
+
+  post Post @relation(fields: [postId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([postId, userId])
+}
+
+model Comment {
+  id     Int    @id @default(autoincrement())
+  postId Int
+  userId String
+  text   String
+
+  post Post @relation(fields: [postId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
