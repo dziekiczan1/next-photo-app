@@ -8,6 +8,7 @@ interface FormFieldProps {
   id: string;
   placeholder?: string;
   required: boolean;
+  type?: string;
   onChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -24,6 +25,7 @@ export const FormField = ({
   id,
   placeholder,
   required,
+  type,
   onChange,
   error,
   helperText,
@@ -47,6 +49,7 @@ export const FormField = ({
           id={id}
           name={name}
           placeholder={placeholder}
+          type={type ? type : "text"}
           required={required}
           onChange={
             onChange as (e: React.ChangeEvent<HTMLInputElement>) => void

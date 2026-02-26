@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Figtree } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Header } from "@/components/header/Header";
+import { Header } from "@/components/header/header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,11 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${geistSans.variable} antialiased`}>
+    <ClerkProvider afterSignOutUrl="/">
+      <html lang="en" className={figtree.variable}>
+        <body className="antialiased dark">
           <Header />
-          {children}
+          <main className="container mx-auto px-4">{children}</main>
         </body>
       </html>
     </ClerkProvider>

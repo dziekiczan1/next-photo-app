@@ -21,26 +21,18 @@ export const UserNav = () => {
         <ClerkLoaded>
           <SignedOut>
             <SignInButton mode="modal">
-              <Button variant="outline">Sign In</Button>
+              <Button>Sign In</Button>
             </SignInButton>
           </SignedOut>
 
-          <SignedIn>
+          <SignedIn className="lg:min-w-[178px]">
             <Button asChild variant="default">
               <Link href="/submit">
                 <Sparkles className="mr-2 h-4 w-4" />
                 Submit Pixel
               </Link>
             </Button>
-
-            <UserButton
-              afterSignOutUrl="/"
-              appearance={{
-                elements: {
-                  avatarBox: "h-9 w-9",
-                },
-              }}
-            />
+            <UserButton />
           </SignedIn>
         </ClerkLoaded>
       </div>

@@ -23,16 +23,16 @@ import { UserLoading } from "@/components/header/user-loading";
 export const MobileNav = () => {
   return (
     <Sheet>
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <UserLoading />
         <ClerkLoaded>
           <SignedOut>
             <SignInButton mode="modal">
-              <Button className="w-full">Zaloguj się</Button>
+              <Button>Sign In</Button>
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
           </SignedIn>
         </ClerkLoaded>
         <SheetTrigger asChild>
