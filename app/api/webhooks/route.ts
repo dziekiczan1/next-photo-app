@@ -10,11 +10,8 @@ export async function POST(req: NextRequest) {
 
   try {
     const evt = await verifyWebhook(req);
-    const { id } = evt.data;
-    const eventType = evt.type;
 
     if (evt.type === "user.created" || evt.type === "user.updated") {
-      console.log("data", evt.data);
       const {
         id,
         first_name,
