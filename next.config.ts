@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "5mb",
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "objectstorage.eu-madrid-3.oraclecloud.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
